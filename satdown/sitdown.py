@@ -17,7 +17,7 @@ def main(arguments):
             )
             exit = 1
         else:
-            pass
+            process(dir, output)
 
     sys.exit(exit)
 
@@ -38,3 +38,10 @@ def logs(repo, since):
 
     # Report status and stdout/stderr as appropriate.
     return (rc == 0, outputs[rc != 0])
+
+def process(dir, log):
+    for commit in log.rstrip("\0").split("\0\n"):
+        sha, author, date, message = commit.split("\0")
+        cmd = ["git", "diff-tree", "-p", "--root", sha]
+        proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, cwd=dir)
+        diff, _ = proc.communicate()
