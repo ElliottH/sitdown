@@ -24,8 +24,8 @@
 
 """Unidiff parsing module."""
 
-from unidiff.parser import UnidiffParseException, parse_unidiff
-from unidiff.patch import (
+from vendor.unidiff.parser import UnidiffParseException, parse_unidiff
+from vendor.unidiff.patch import (
     LINE_TYPE_ADD,
     LINE_TYPE_DELETE,
     LINE_TYPE_CONTEXT,

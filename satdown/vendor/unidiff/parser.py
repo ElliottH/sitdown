@@ -24,7 +24,7 @@
 
 """Unified diff parser module."""
 
-from unidiff.patch import (
+from vendor.unidiff.patch import (
     LINE_TYPE_ADD,
     LINE_TYPE_DELETE,
     LINE_TYPE_CONTEXT,
@@ -32,7 +32,7 @@ from unidiff.patch import (
     PatchedFile,
     PatchSet
 )
-from unidiff.utils import (
+from vendor.unidiff.utils import (
     RE_HUNK_BODY_LINE,
     RE_HUNK_HEADER,
     RE_SOURCE_FILENAME,
