@@ -5,6 +5,7 @@ import re
 from collections import defaultdict
 
 import satdown.utils
+import satdown.format
 
 from satdown.vendor.unidiff import parser
 
@@ -13,6 +14,7 @@ RE_TODO = re.compile("^\W*?TODO(?:\s|:)\s*(.*)$",re.MULTILINE)
 
 def main(arguments):
     exit = 0
+    changes = {}
     results = ((dir, logs(dir, arguments['since'])) for dir in arguments['repos'])
     for r in results:
         (dir, (success, output)) = r
@@ -23,8 +25,9 @@ def main(arguments):
             )
             exit = 1
         else:
-            import pprint; pprint.pprint(process(dir, output))
+            changes[dir] = process(dir, output)
 
+    import pprint; pprint.pprint(satdown.format.SORT[arguments['sort']](changes))
     sys.exit(exit)
 
 def logs(repo, since):
